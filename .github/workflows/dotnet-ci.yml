@@ -7,22 +7,21 @@ on:
     branches: [ main ]
     
 env:    
-  SOLUTION_FILE_PATH: 'src'
+  Solution_Name: 'src/CrashLog.sln'
 
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Setup .NET
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Install .NET Core
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: nuget restore ${{env.SOLUTION_FILE_PATH}}
-    - name: Build
-      run: dotnet build ${{env.SOLUTION_FILE_PATH}} --no-restore
-      env:
-          OS: ubuntu
+
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v1.0.2
