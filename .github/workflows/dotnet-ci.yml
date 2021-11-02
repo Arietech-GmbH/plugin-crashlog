@@ -28,7 +28,18 @@ jobs:
       
     - name: Nuget Restore
       run: nuget restore ${{ env.Solution_Name }}
-
+      
+    - name: GitVersion
+      id: gitversion
+      uses: nmcc/actions/gitversion@v1
+      with:
+        path-to-gitversion: packages/GitVersion.CommandLine/tools/GitVersion.exe
+  
+    - name: Create Release
+      uses: actions/create-release@v1
+      with:
+        tag_name: ${{ steps.gitversion.outputs.SemVer }}
+  
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
