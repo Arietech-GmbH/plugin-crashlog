@@ -8,6 +8,7 @@ on:
     
 env:    
   SOLUTION_FILE_PATH: 'src'
+  OS: 'ubuntu'
 
 jobs:
   build:
