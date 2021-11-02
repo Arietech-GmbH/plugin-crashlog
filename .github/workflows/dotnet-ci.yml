@@ -25,4 +25,4 @@ jobs:
     - name: Build
       run: dotnet build ${{env.SOLUTION_FILE_PATH}} --no-restore
       env:
-          OS: 'ubuntu'
+          OS: ubuntu
