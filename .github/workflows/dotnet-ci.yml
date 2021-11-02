@@ -8,7 +8,6 @@ on:
     
 env:    
   SOLUTION_FILE_PATH: 'src'
-  OS: 'ubuntu'
 
 jobs:
   build:
@@ -25,3 +24,5 @@ jobs:
       run: nuget restore ${{env.SOLUTION_FILE_PATH}}
     - name: Build
       run: dotnet build ${{env.SOLUTION_FILE_PATH}} --no-restore
+      env:
+          OS: 'ubuntu'
