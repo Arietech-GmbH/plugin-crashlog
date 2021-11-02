@@ -11,7 +11,9 @@ namespace ArieTech.Plugin.CrashLog
     /// </summary>
     public class CrashLogImplementation : ICrashLog
     {
-        public void Init(string filename = "Fatal")
+        public string Filename { get; set; } = "Fatal";
+
+        public void Init(object context = null)
         {
             throw new NotImplementedException();
         }

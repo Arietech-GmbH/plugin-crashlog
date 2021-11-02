@@ -19,13 +19,13 @@ namespace ArieTech.Plugin.CrashLog
     /// </summary>
     public class CrashLogImplementation : ICrashLog
     {
-        static string Filename;
         Context context;
 
-        public void Init(Context context, string filename = "Fatal")
+        public string Filename { get; set; } = "Fatal";
+
+        public void Init(object context = null)
         {
-            this.context = context;
-            Filename = filename;
+            this.context = context as Context;
 
             // global exception handling
             TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
@@ -36,13 +36,13 @@ namespace ArieTech.Plugin.CrashLog
 
         void TaskSchedulerOnUnobservedTaskException(object sender, UnobservedTaskExceptionEventArgs unobservedTaskExceptionEventArgs)
         {
-            var newExc = new Exception("TaskSchedulerOnUnobservedTaskException", unobservedTaskExceptionEventArgs.Exception);
+            var newExc = new Exception(nameof(TaskSchedulerOnUnobservedTaskException), unobservedTaskExceptionEventArgs.Exception);
             LogUnhandledException(newExc);
         }
 
         void AndroidEnvironmentOnUnhandledExceptionRaiser(object sender, RaiseThrowableEventArgs raiseThrowableEventArgs)
         {
-            var newExc = new Exception("AndroidEnvironmentOnUnhandledExceptionRaiser", raiseThrowableEventArgs.Exception);
+            var newExc = new Exception(nameof(AndroidEnvironmentOnUnhandledExceptionRaiser), raiseThrowableEventArgs.Exception);
             LogUnhandledException(newExc);
         }
 
@@ -51,8 +51,8 @@ namespace ArieTech.Plugin.CrashLog
             try
             {
                 var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-                var files = Directory.GetFiles(libraryPath, $"{Filename}?.log").ToList();
-                string errorFileName = $"{Filename}{files.Count + 1}.log";
+                var files = Directory.GetFiles(libraryPath, $"{CrossCrashLog.Current.Filename}?.log").ToList();
+                string errorFileName = $"{CrossCrashLog.Current.Filename}{files.Count + 1}.log";
 
                 var errorFilePath = Path.Combine(libraryPath, errorFileName);
                 var errorMessage = string.Format("Time: {0}\r\nError: Unhandled Exception\r\n{1}\r\nCallStack:\r\n{2}",
@@ -75,34 +75,38 @@ namespace ArieTech.Plugin.CrashLog
         [Conditional("DEBUG")]
         private void DisplayCrashReport()
         {
-            var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
-            var files = Directory.EnumerateFiles(libraryPath, $"{Filename}?.log").ToList();
 
-            if (files.Count() == 0)
+            if (context != null)
             {
-                return;
-            }
+                var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Personal);
+                var files = Directory.EnumerateFiles(libraryPath, $"{CrossCrashLog.Current.Filename}?.log").ToList();
 
-            var errorFilePath = Path.Combine(libraryPath, files.Last());
-
-            if (!File.Exists(errorFilePath))
-            {
-                return;
-            }
-
-            var errorText = File.ReadAllText(errorFilePath);
-            new AlertDialog.Builder(context)
-                .SetPositiveButton("Clear", (sender, args) =>
+                if (files.Count() == 0)
                 {
-                    File.Delete(errorFilePath);
-                })
-                .SetNegativeButton("Close", (sender, args) =>
+                    return;
+                }
+
+                var errorFilePath = Path.Combine(libraryPath, files.Last());
+
+                if (!File.Exists(errorFilePath))
                 {
-                    // User pressed Close.
-                })
-                .SetMessage(errorText)
-                .SetTitle("Crash Report")
-                .Show();
+                    return;
+                }
+
+                var errorText = File.ReadAllText(errorFilePath);
+                new AlertDialog.Builder(context)
+                    .SetPositiveButton("Clear", (sender, args) =>
+                    {
+                        File.Delete(errorFilePath);
+                    })
+                    .SetNegativeButton("Close", (sender, args) =>
+                    {
+                        // User pressed Close.
+                    })
+                    .SetMessage(errorText)
+                    .SetTitle("Crash Report")
+                    .Show();
+            }
         }
     }
 }

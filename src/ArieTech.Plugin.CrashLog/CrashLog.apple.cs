@@ -16,12 +16,10 @@ namespace ArieTech.Plugin.CrashLog
     /// </summary>
     public class CrashLogImplementation : ICrashLog
     {
-        static string Filename;
+        public string Filename { get; set; } = "Fatal";
 
-        public void Init(string filename = "Fatal")
+        public void Init(object context = null)
         {
-            Filename = filename;
-
             // global exception handling
             TaskScheduler.UnobservedTaskException += TaskSchedulerOnUnobservedTaskException;
             AppDomain.CurrentDomain.UnhandledException += CurrentDomainOnUnhandledException;
@@ -84,11 +82,11 @@ namespace ArieTech.Plugin.CrashLog
             {
 
                 var libraryPath = Environment.GetFolderPath(Environment.SpecialFolder.Resources);
-                var files = Directory.GetFiles(libraryPath, $"{Filename}?.log").ToList();
-                string errorFileName = $"{Filename}{files.Count + 1}.log";
+                var files = Directory.GetFiles(libraryPath, $"{CrossCrashLog.Current.Filename}?.log").ToList();
+                string errorFileName = $"{CrossCrashLog.Current.Filename}{files.Count + 1}.log";
 
                 var errorFilePath = Path.Combine(libraryPath, errorFileName);
-                var errorMessage = String.Format("Time: {0}\r\nError: Unhandled Exception\r\n{1}\r\nCallStack:\r\n{2}",
+                var errorMessage = string.Format("Time: {0}\r\nError: Unhandled Exception\r\n{1}\r\nCallStack:\r\n{2}",
                 DateTime.Now, exception.ToString(), exception.StackTrace);
                 File.WriteAllText(errorFilePath, errorMessage);
 

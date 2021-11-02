@@ -7,7 +7,7 @@ Get started by reading the [Plugin documentation]()
 
 ### NuGet  
 [![Nuget](https://img.shields.io/nuget/v/Plugin.AppShortcuts.svg?label=NuGet)](https://www.nuget.org/packages/Plugin.AppShortcuts/)  
-Available on Nuget: [Plugin.AppShortcuts](https://www.nuget.org/packages/Plugin.AppShortcuts) 
+Available on Nuget: [ArieTech.Plugin.CrashLog](https://www.nuget.org/packages/Plugin.AppShortcuts) 
   
 
 ### Plaform Support
@@ -20,7 +20,7 @@ Available on Nuget: [Plugin.AppShortcuts](https://www.nuget.org/packages/Plugin.
   
 
 ### Created By: ArieTech GmbH
-* Email: [@Dev](dev@arietech.de)  
+* Email: [dev@arietech.de](dev@arietech.de)  
 
 
 

@@ -11,6 +11,7 @@ namespace ArieTech.Plugin.CrashLog
     /// </summary>
     public static class CrossCrashLog
     {
+
         static Lazy<ICrashLog> implementation = new Lazy<ICrashLog>(() => CreateCrashLog(), System.Threading.LazyThreadSafetyMode.PublicationOnly);
 
         /// <summary>

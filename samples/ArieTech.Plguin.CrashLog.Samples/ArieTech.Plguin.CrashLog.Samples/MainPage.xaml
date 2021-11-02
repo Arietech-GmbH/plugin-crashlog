@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="ArieTech.Plugin.CrashLog.Samples.MainPage">
+
+    <StackLayout>
+        <Frame
+            BackgroundColor="{StaticResource SystemGray}"
+            Padding="24"
+            CornerRadius="0">
+            <Label
+                Text="Fatal Crash Logger Sample"
+                HorizontalTextAlignment="Center"
+                TextColor="White"
+                FontSize="36"/>
+        </Frame>
+        <Label
+            Text="Throw an excption an restart the App"
+            FontSize="Title"
+            Padding="30,10,30,10"/>
+        <StackLayout Orientation="Horizontal">
+            <Label
+                Text="The CrashLog Component generates a 'fatal[number].log' file with the StackTrace in the environment folder of the App as listed below:"
+                FontSize="16"
+                Padding="30,0,30,0"/>
+            <Button
+                VerticalOptions="Start"
+                HorizontalOptions="EndAndExpand"
+                Command="{Binding ViewCommand}"
+                FontSize="12"
+                Margin="0,-10,10,0"
+                HeightRequest="42"
+                Text="Show Log" />
+        </StackLayout>
+        <Grid
+            VerticalOptions="FillAndExpand">
+            <ListView
+                x:Name="ReportList"
+                BackgroundColor="LightGray"
+                VerticalOptions="StartAndExpand"
+                ItemsSource="{Binding CrashReports}"
+                SelectedItem="{Binding SelectedItem}"
+                SelectionMode="Single">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid
+                                Padding="5"
+                                RowDefinitions="22,22">
+                                <Label
+                                    Grid.Row="0"
+                                    Text="{Binding Path=File}"
+                                    HorizontalOptions="StartAndExpand"
+                                    LineBreakMode="HeadTruncation"
+                                    TextColor="{StaticResource SystemGrayDark}"/>
+                                <Label
+                                    Grid.Row="1"
+                                    Text="{Binding Path=Description}"
+                                    HorizontalOptions="StartAndExpand"
+                                    Margin="0,-10,0,0"
+                                    TextColor="{StaticResource SystemGrayDark}" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Button
+            BackgroundColor="{StaticResource SystemYelloGreen}"
+            TextColor="{StaticResource SystemGrayDark}"
+            FontSize="Title"
+            HorizontalOptions="FillAndExpand"
+            Padding="5"
+            Margin="20,15"
+            Command="{Binding ThrowExceptionCommand}"
+            Text="Throw Exception" />
+    </StackLayout>
+
+</ContentPage>
