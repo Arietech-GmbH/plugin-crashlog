@@ -28,23 +28,7 @@ jobs:
       
     - name: Nuget Restore
       run: nuget restore ${{ env.Solution_Name }}
-
-    - name: Install GitVersion
-      uses: gittools/actions/gitversion/setup@v0.9.7
-      with:
-        versionSpec: '5.x'
-
-    - name: Determine Version
-      id: gitversion
-      uses: gittools/actions/gitversion/execute@v0.9.7
-      with:
-        useConfigFile: true
-        
-    - name: Create Release
-      uses: actions/create-release@v1
-      with:
-        tag_name: ${{ steps.gitversion.outputs.SemVer }}
-  
+         
     - name: Setup MSBuild.exe
       uses: microsoft/setup-msbuild@v1.0.2
 
