@@ -1,4 +1,4 @@
-name: .NET
+name: Release
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
     
 env:    
   Solution_Name: 'src/CrashLog.sln'
+  
 
 jobs:
   build:
@@ -41,3 +42,6 @@ jobs:
 
     - name: MSBuild
       run: msbuild ${{ env.Solution_Name }}
+      
+    - name: Nuget Pack
+      run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version ${VERSION}
