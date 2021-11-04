@@ -23,8 +23,13 @@ jobs:
     #    git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
     #    git branch --remote --contains | grep origin/main
         
+    #- name: Set VERSION variable from tag
+    #  run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+      
     - name: Set VERSION variable from tag
-      run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
+    - run: echo ("BRANCH_NAME=" + $env:GITHUB_REF.replace('refs/heads/tags/v', '')) >> $env:GITHUB_ENV
+    
+    - run: echo $env:BRANCH_NAME
 
     - name: Install .NET Core
       uses: actions/setup-dotnet@v1
@@ -44,4 +49,4 @@ jobs:
       run: msbuild ${{ env.Solution_Name }}
       
     - name: Nuget Pack
-      run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version ${VERSION}
+      run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:BRANCH_NAME
