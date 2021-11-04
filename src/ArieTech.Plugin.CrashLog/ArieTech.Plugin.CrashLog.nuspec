@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<package >
+<package>
     <metadata>
     <id>ArieTech.Plugin.CrashLog</id>
     <version>1.0.0</version>
@@ -22,16 +22,16 @@
     </metadata>
     <files>
         <!-- Cross-platform reference assemblies -->
-        <file src="ArieTech.Plugin.CrashLog\bin\Release\ArieTech.Plugin.CrashLog.dll" target="lib\netstandard2.0\ArieTech.Plugin.CrashLog.dll" />
-        <file src="ArieTech.Plugin.CrashLog\bin\Release\ArieTech.Plugin.CrashLog.xml" target="lib\netstandard2.0\ArieTech.Plugin.CrashLog.xml" />
+        <file src="bin\Release\netstandard2.0\ArieTech.Plugin.CrashLog.dll" target="lib\netstandard2.0\ArieTech.Plugin.CrashLog.dll" />
+        <file src="bin\Release\netstandard2.0\ArieTech.Plugin.CrashLog.xml" target="lib\netstandard2.0\ArieTech.Plugin.CrashLog.xml" />
 
         <!-- iOS reference assemblies -->
-        <file src="ArieTech.Plugin.CrashLog.iOS\bin\Release\ArieTech.Plugin.CrashLog.dll" target="lib\Xamarin.iOS10\ArieTech.Plugin.CrashLog.dll" />
-        <file src="ArieTech.Plugin.CrashLog.iOS\bin\Release\ArieTech.Plugin.CrashLog.xml" target="lib\Xamarin.iOS10\ArieTech.Plugin.CrashLog.xml" />
+        <file src="bin\Release\Xamarin.iOS10\ArieTech.Plugin.CrashLog.dll" target="lib\Xamarin.iOS10\ArieTech.Plugin.CrashLog.dll" />
+        <file src="bin\Release\Xamarin.iOS10\ArieTech.Plugin.CrashLog.xml" target="lib\Xamarin.iOS10\ArieTech.Plugin.CrashLog.xml" />
 
         <!-- Android reference assemblies -->
-        <file src="ArieTech.Plugin.CrashLog.Android\bin\Release\ArieTech.Plugin.CrashLog.dll" target="lib\MonoAndroid90\ArieTech.Plugin.CrashLog.dll" />
-        <file src="ArieTech.Plugin.CrashLog.Android\bin\Release\ArieTech.Plugin.CrashLog.xml" target="lib\MonoAndroid90\ArieTech.Plugin.CrashLog.xml" />
+        <file src="bin\Release\MonoAndroid90\ArieTech.Plugin.CrashLog.dll" target="lib\MonoAndroid90\ArieTech.Plugin.CrashLog.dll" />
+        <file src="bin\Release\MonoAndroid90\ArieTech.Plugin.CrashLog.xml" target="lib\MonoAndroid90\ArieTech.Plugin.CrashLog.xml" />
 
     </files>
 </package>
