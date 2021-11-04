@@ -50,3 +50,8 @@ jobs:
       
     - name: Nuget Pack
       run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:BRANCH_NAME
+
+    - name: Push
+      run: nuget push "**/*.nupkg" --source https://nuget.pkg.github.com/Arietech-GmbH/index.json --api-key $env:GITHUB_TOKEN
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
