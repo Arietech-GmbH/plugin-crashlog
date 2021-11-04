@@ -46,7 +46,7 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: MSBuild
-      run: msbuild ${{ env.Solution_Name }}
+      run: msbuild ${{ env.Solution_Name }} /p:Configuration=Release /p:Platform="Any CPU"
       
     - name: Nuget Pack
       run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:BRANCH_NAME
