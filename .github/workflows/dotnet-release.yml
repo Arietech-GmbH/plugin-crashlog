@@ -19,13 +19,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
-        source-url: ${{ env.GITHUB_PACKAGE_REGISTRY_URL }}
-      env:
-        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    #- name: Setup .NET
+    #  uses: actions/setup-dotnet@v1
+    #  with:
+    #    dotnet-version: 5.0.x
+    #    source-url: ${{ env.GITHUB_PACKAGE_REGISTRY_URL }}
+    #  env:
+    #    NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       
     #- name: Verify commit exists in origin/main
     #  run: |
