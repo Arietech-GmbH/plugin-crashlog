@@ -9,6 +9,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Automatic platform crashlog handling</description>
     <releaseNotes>First release</releaseNotes>
+    <repository type="git" url="https://github.com/Arietech-GmbH/plugin-crashlog.git"</repository>
     <copyright>Copyright 2021</copyright>
     <tags>crash logger logging</tags>
         <dependencies>
