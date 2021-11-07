@@ -59,9 +59,12 @@ jobs:
       
     #- name: NuGet pack
     #  run: dotnet pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -p:PackageVersion=$env:TAG_NAME
+    
+    - name: Nuget Source
+      run: nuget source Add -Name "Arietech" -Source "https://nuget.pkg.github.com/Arietech-GmbH/index.json" -UserName "Arietech" -Password ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Publish NuGet Package
-      run: dotnet nuget push "**/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }}
+    #- name: Publish NuGet Package
+    #  run: dotnet nuget push "**/*.nupkg" --api-key ${{ secrets.GITHUB_TOKEN }}
       
-    #- name: Push
-      #run: nuget push "**/*.nupkg" -Source https://nuget.pkg.github.com/Arietech-GmbH/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+    - name: Push
+      run: nuget push "**/*.nupkg" -Source "Arietech"
