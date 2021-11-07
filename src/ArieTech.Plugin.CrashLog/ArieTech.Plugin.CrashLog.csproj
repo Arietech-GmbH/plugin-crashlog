@@ -18,7 +18,7 @@
     <AssemblyFileVersion>0.1.0.0</AssemblyFileVersion>
     <Version>0.1.0-beta</Version>
     <PackageVersion>0.1.0-beta</PackageVersion>
-    <PackOnBuild>true</PackOnBuild>
+    <PackOnBuild>false</PackOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
     <DefineConstants>$(DefineConstants);</DefineConstants>
