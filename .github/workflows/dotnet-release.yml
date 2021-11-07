@@ -54,11 +54,11 @@ jobs:
     - name: MSBuild
       run: msbuild ${{ env.Solution_Name }} /p:Configuration=Release /p:Platform="Any CPU"
       
-    #- name: Nuget Pack
-    #  run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:TAG_NAME
+    - name: Nuget Pack
+      run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:TAG_NAME
       
-    - name: NuGet pack
-      run: dotnet pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -p:PackageVersion=$env:TAG_NAME
+    #- name: NuGet pack
+    #  run: dotnet pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -p:PackageVersion=$env:TAG_NAME
 
     - name: Publish NuGet Package
       run: dotnet nuget push "**/*.nupkg"
