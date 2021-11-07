@@ -18,23 +18,28 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
       
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: 5.0.x
+        source-url: ${{ env.GITHUB_PACKAGE_REGISTRY_URL }}
+      env:
+        NUGET_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
     #- name: Verify commit exists in origin/main
     #  run: |
     #    git fetch --no-tags --prune --depth=1 origin +refs/heads/*:refs/remotes/origin/*
     #    git branch --remote --contains | grep origin/main
-        
-    #- name: Set VERSION variable from tag
-    #  run: echo "VERSION=${GITHUB_REF/refs\/tags\/v/}" >> $GITHUB_ENV
-      
+             
     - name: Set VERSION variable from tag
-      run: echo ("BRANCH_NAME=" + $env:GITHUB_REF.replace('refs/tags/v', '')) >> $env:GITHUB_ENV
+      run: echo ("TAG_NAME=" + $env:GITHUB_REF.replace('refs/tags/v', '')) >> $env:GITHUB_ENV
     
-    - run: echo $env:BRANCH_NAME
+    - run: echo $env:TAG_NAME
 
-    - name: Install .NET Core
-      uses: actions/setup-dotnet@v1
-      with:
-        dotnet-version: 5.0.x
+    #- name: Install .NET Core
+    #  uses: actions/setup-dotnet@v1
+    #  with:
+    #    dotnet-version: 5.0.x
         
     - name: Setup Nuget.exe
       uses: nuget/setup-nuget@v1
@@ -48,8 +53,14 @@ jobs:
     - name: MSBuild
       run: msbuild ${{ env.Solution_Name }} /p:Configuration=Release /p:Platform="Any CPU"
       
-    - name: Nuget Pack
-      run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:BRANCH_NAME
+    #- name: Nuget Pack
+    #  run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:TAG_NAME
+      
+    - name: NuGet pack
+      run: dotnet pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -p:PackageVersion=$env:TAG_NAME
 
-    - name: Push
-      run: nuget push "**/*.nupkg" -Source https://nuget.pkg.github.com/Arietech-GmbH/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
+    - name: Publish NuGet Package
+      run: dotnet nuget push "**/*.nupkg"
+      
+    #- name: Push
+      #run: nuget push "**/*.nupkg" -Source https://nuget.pkg.github.com/Arietech-GmbH/index.json -ApiKey ${{ secrets.GITHUB_TOKEN }}
