@@ -16,7 +16,7 @@ Available on Nuget: [ArieTech.Plugin.CrashLog](https://www.nuget.org/packages/Pl
 | ------------------- |  :------------------: |
 |Xamarin.iOS|iOS 8+|
 |Xamarin.Android|API 10+|
-|Windows 10 UWP|10+|
+|Windows 10 UWP|planed|
   
 
 ### Created By: ArieTech GmbH
