@@ -19,6 +19,7 @@
     <Version>0.1.0-beta</Version>
     <PackageVersion>0.1.0-beta</PackageVersion>
     <PackOnBuild>false</PackOnBuild>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <NeutralLanguage>en</NeutralLanguage>
     <LangVersion>default</LangVersion>
     <DefineConstants>$(DefineConstants);</DefineConstants>
