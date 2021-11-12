@@ -39,10 +39,10 @@ jobs:
       uses: microsoft/setup-msbuild@v1.0.2
 
     - name: MSBuild
-      run: msbuild ${{ env.Solution_Name }} /p:Configuration=Release /p:Platform="Any CPU"
+      run: msbuild ${{ env.Solution_Name }} /p:Configuration=Release /p:Platform="Any CPU" /p:PackageVersion=$env:TAG_NAME
       
-    - name: Nuget Pack
-      run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:TAG_NAME
+    #- name: Nuget Pack
+    #  run: nuget pack 'src/ArieTech.Plugin.CrashLog/ArieTech.Plugin.CrashLog.nuspec' -Version $env:TAG_NAME
     
     - name: Nuget Source
       run: nuget source Add -Name "Arietech" -Source "https://nuget.pkg.github.com/Arietech-GmbH/index.json" -UserName "Arietech" -Password ${{ secrets.GITHUB_TOKEN }}
